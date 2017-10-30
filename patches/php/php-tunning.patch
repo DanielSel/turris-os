@@ -29,3 +29,17 @@ index c88ab0a4..d08815a0 100644
  max_file_uploads = 20
  
  ; Fopen wrappers
+diff --git a/lang/php7/Makefile b/lang/php7/Makefile
+index f7bdd66e..beeb6281 100644
+--- a/lang/php7/Makefile
++++ b/lang/php7/Makefile
+@@ -151,6 +151,9 @@ CONFIGURE_ARGS+= \
+        --enable-cgi \
+        --enable-fpm \
+        --enable-shared \
++       --enable-opcache \
++       --enable-intl \
++       --enable-mbstring \
+        --disable-static \
+        --disable-rpath \
+        --disable-debug \
