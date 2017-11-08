@@ -8,14 +8,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=qemu
-PKG_VERSION:=2.7.1
+PKG_VERSION:=2.10.1
 PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=http://wiki.qemu-project.org/download/
-PKG_SOURCE_MD5SUM:=680510952c23cca1d086c846451d9f1b
+PKG_SOURCE_MD5SUM:=0c4d98038480c5c19a95990eb8d04a51
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE tcg/LICENSE
-PKG_MAINTAINER:=Yousong Zhou <yszhou4tech@gmail.com>
+PKG_MAINTAINER:=CZ.NIC <packaging@turris.cz>
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -31,7 +31,6 @@ define Package/qemu/description
   This package contains the QEMU
 endef
 
-# QEMU configure script does not recognize these options
 CONFIGURE_ARGS:=$(filter-out	\
 	--target=%		\
 	--host=%		\
@@ -42,7 +41,6 @@ CONFIGURE_ARGS:=$(filter-out	\
 	--disable-nls		\
 	, $(CONFIGURE_ARGS))
 
-# Building qemu-ga alone does not require zlib
 CONFIGURE_ARGS+=			\
 	--cross-prefix="$(TARGET_CROSS)"	\
 	--host-cc="$(HOSTCC)"		\
