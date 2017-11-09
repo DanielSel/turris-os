@@ -13,8 +13,6 @@ PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=http://wiki.qemu-project.org/download/
 PKG_SOURCE_MD5SUM:=0c4d98038480c5c19a95990eb8d04a51
-PKG_LICENSE:=GPL-2.0
-PKG_LICENSE_FILES:=LICENSE tcg/LICENSE
 PKG_MAINTAINER:=CZ.NIC <packaging@turris.cz>
 
 include $(INCLUDE_DIR)/package.mk
@@ -28,7 +26,8 @@ define Package/qemu
 endef
 
 define Package/qemu/description
-  This package contains the QEMU
+ This package contains the QEMU user emulation.
+ It contains just x86-64 and i386 emulators so far.
 endef
 
 CONFIGURE_ARGS:=$(filter-out	\
@@ -50,11 +49,12 @@ CONFIGURE_ARGS+=			\
 	--disable-sdl \
 	--disable-gtk \
 	--disable-vnc \
+	--disable-docs \
 	--disable-spice \
 	--without-pixman --disable-tools --disable-system
 
 define Package/qemu/install
-	$(MAKE) DESTDIR="$(1)" install
+	$(MAKE) -C $(PKG_BUILD_DIR) DESTDIR="$(1)" install
 endef
 
 $(eval $(call BuildPackage,qemu))
